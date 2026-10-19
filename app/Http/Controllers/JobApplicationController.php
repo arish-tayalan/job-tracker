@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Enums\ApplicationStatus;
 use App\Http\Requests\JobApplicationRequest;
 use App\Models\JobApplication;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class JobApplicationController extends Controller
@@ -103,6 +105,25 @@ class JobApplicationController extends Controller
 
         return redirect()->route('job-applications.index')
             ->with('status', 'Application updated.');
+    }
+
+    /**
+     * Change only the status. Called with fetch() from the kanban board when a card is moved.
+     */
+    public function updateStatus(Request $request, JobApplication $jobApplication): JsonResponse
+    {
+        Gate::authorize('update', $jobApplication);
+
+        $validated = $request->validate([
+            'status' => ['required', Rule::enum(ApplicationStatus::class)],
+        ]);
+
+        $jobApplication->update(['status' => $validated['status']]);
+
+        return response()->json([
+            'id' => $jobApplication->id,
+            'status' => $jobApplication->status->value,
+        ]);
     }
 
     public function destroy(JobApplication $jobApplication): RedirectResponse

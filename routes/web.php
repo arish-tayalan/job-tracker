@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\JobApplicationController;
@@ -21,6 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('applications', JobApplicationController::class)
         ->names('job-applications')
         ->parameters(['applications' => 'jobApplication']);
+
+    Route::get('/board', BoardController::class)->name('board');
+    // Used by the board's drag-and-drop. Declared before the resource so the URL is unambiguous.
+    Route::patch('/applications/{jobApplication}/status', [JobApplicationController::class, 'updateStatus'])
+        ->name('job-applications.status');
 
     // Interviews belong to an application: add via the application, delete by interview id.
     Route::post('/applications/{jobApplication}/interviews', [InterviewController::class, 'store'])

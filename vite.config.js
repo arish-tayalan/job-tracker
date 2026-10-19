@@ -4,8 +4,13 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            // dashboard.js is its own entry so Chart.js is only downloaded on the dashboard page.
-            input: ['resources/css/app.css', 'resources/js/app.js', 'resources/js/dashboard.js'],
+            // dashboard.js and board.js are their own entries so each page only downloads what it needs.
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+                'resources/js/dashboard.js',
+                'resources/js/board.js',
+            ],
             refresh: true,
         }),
     ],

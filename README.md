@@ -11,6 +11,7 @@ Built with **Laravel 12**, **Laravel Breeze** (Blade + Tailwind CSS), **MySQL** 
 - Status filter tabs with live counts, search by company or position, sortable columns, pagination
 - Log interviews (date, type, notes) against each application
 - Follow-up dates, with a "Follow up due" flag on open applications
+- Kanban board: drag cards between status columns (or use the "Move to" menu on touch screens)
 - Dashboard: totals, interview rate, status doughnut chart, applications-per-week chart, upcoming interviews
 - Each user only sees and can change their own data (enforced with a policy)
 - Server-side validation via Form Requests
