@@ -47,6 +47,24 @@ php artisan serve
 
 Open http://127.0.0.1:8000 and log in with the demo account **test@example.com / password**.
 
+## Deploying to Railway
+
+1. Create a Railway project from this GitHub repo and add a **MySQL** database service.
+2. On the app service set these variables:
+
+   | Variable | Value |
+   | --- | --- |
+   | `APP_KEY` | output of `php artisan key:generate --show` |
+   | `APP_ENV` | `production` |
+   | `APP_DEBUG` | `false` |
+   | `APP_URL` | your Railway domain, e.g. `https://job-tracker.up.railway.app` |
+   | `DB_CONNECTION` | `mysql` |
+   | `DB_URL` | `${{MySQL.MYSQL_URL}}` |
+   | `LOG_CHANNEL` | `stderr` |
+
+3. Settings: build command `npm run build`, pre-deploy command `php artisan migrate --force`.
+4. Under **Settings > Networking**, click **Generate Domain**.
+
 ## Running the tests
 
 ```bash

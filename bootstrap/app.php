@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // In production the app sits behind a hosting proxy (Railway) that handles HTTPS.
+        // Trusting its X-Forwarded-* headers makes Laravel build https:// links instead of http://.
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
