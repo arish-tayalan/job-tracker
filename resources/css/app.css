@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Landing page effects. The JavaScript that drives them is in resources/js/landing.js. */
+
+/* Follows the cursor: JS sets --mx and --my on the hero. */
+.spotlight {
+    background-image: radial-gradient(600px circle at var(--mx, 70%) var(--my, 30%), rgba(99, 102, 241, 0.16), transparent 60%);
+}
+
+/* Screenshot tilts toward the cursor: JS sets --tilt-x and --tilt-y. */
+.tilt {
+    transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition: transform 0.15s ease-out;
+    will-change: transform;
+}
+
+/* Fade-and-rise as sections scroll into view. The "js" class is added in <head>, so
+   without JavaScript everything simply stays visible. */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* Gentle bobbing for the floating labels. */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+.float { animation: float 5s ease-in-out infinite; }
+.float-delayed { animation-delay: 1.5s; }
+
+/* Respect people who ask their system for less motion. */
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .tilt { transform: none; transition: none; }
+    .float { animation: none; }
+}
