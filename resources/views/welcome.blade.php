@@ -16,9 +16,7 @@
         {{-- Top bar --}}
         <header class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2 font-bold text-lg">
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white" aria-hidden="true">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </span>
+                <x-application-logo class="h-8 w-8" />
                 {{ config('app.name') }}
             </a>
 
