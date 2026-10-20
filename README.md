@@ -65,6 +65,16 @@ Open http://127.0.0.1:8000 and log in with the demo account **test@example.com /
 3. Settings: build command `npm run build`, pre-deploy command `php artisan migrate --force`.
 4. Under **Settings > Networking**, click **Generate Domain**.
 
+## Demo account
+
+To fill a database with realistic sample data (works in production, no Faker needed):
+
+```bash
+php artisan db:seed --class=DemoSeeder --force
+```
+
+Log in with **demo@example.com / DemoPass123**. Running it again resets only the demo account.
+
 ## Running the tests
 
 ```bash
